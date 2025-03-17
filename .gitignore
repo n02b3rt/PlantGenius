@@ -1,2 +1,7 @@
 .idea
 data
+src/components/__pycache__/status_bar.cpython-313.pyc
+src/components/__pycache__/__init__.cpython-313.pyc
+src/components/__pycache__/card.cpython-313.pyc
+src/components/__pycache__/dashboard.cpython-313.pyc
+src/components/__pycache__/sidebar.cpython-313.pyc
