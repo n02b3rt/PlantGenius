@@ -1,7 +1,15 @@
-export default function Header() {
+export default function Header({ onViewChange }) {
     return (
-        <aside className="w-lvh size-75 bg-sky-50 p-2">
+        <header className="bg-sky-50 p-4 flex justify-between items-center shadow-md">
             <h1 className="text-2xl font-bold">PLANTGENIUS</h1>
-        </aside>
+            <nav className="flex gap-6 text-sm font-medium text-gray-800">
+                <span className="cursor-pointer hover:underline" onClick={() => onViewChange("sensors")}>
+                    Czujniki
+                </span>
+                <span className="cursor-pointer hover:underline" onClick={() => onViewChange("devices")}>
+                    Urządzenia
+                </span>
+            </nav>
+        </header>
     );
 }
