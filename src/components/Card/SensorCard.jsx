@@ -1,4 +1,3 @@
-// SensorCard.jsx
 import { ReactComponent as WaterIcon } from "./potted_plant.svg";
 
 export default function SensorCard({ device, pin, raw, state, onClick }) {
