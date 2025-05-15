@@ -41,7 +41,7 @@ export default function DeviceList() {
     };
 
     return (
-        <div className="relative">
+        <div>
             <button
                 onClick={() => setShowForm(true)}
                 className="absolute bottom-[200px] right-0 m-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full text-lg"
