@@ -23,7 +23,9 @@ export default function SensorGrid() {
         };
 
         fetchStatus();
+        console.log(fetchStatus())
         fetchSensors();
+        console.log(fetchSensors());
         const interval = setInterval(() => {
             fetchStatus();
             fetchSensors();
@@ -40,28 +42,30 @@ export default function SensorGrid() {
             />
         );
     }
-    const aliasStatusMap = {};
+
+    const idStatusMap = {};
+    const idAliasMap = {};
+
     Object.entries(deviceStatus).forEach(([mac, info]) => {
-        if (info.alias) {
-            aliasStatusMap[`pico_${info.alias.toLowerCase().replace("pico", "")}`] = info.status;
+        if (info.id !== undefined) {
+            idStatusMap[info.id] = info.status;
+            idAliasMap[info.id] = info.alias ?? mac;
         }
     });
 
     return (
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {Object.entries(sensors).map(([key, data]) => {
-                const [device, pin] = key.split("_pin_");
-                const deviceAlias = device.toLowerCase();
-                const isOnline = aliasStatusMap[deviceAlias] === "online";
-
-                console.log(`[DEBUG] ${deviceAlias} is ${aliasStatusMap[deviceAlias]}`);
-
+                const isOnline = idStatusMap[data.id] === "online";
                 if (!isOnline) return null;
+
+                const [device, pin] = key.split("_pin_");
+                const deviceName = idAliasMap[data.id] ?? device;
 
                 return (
                     <SensorCard
                         key={key}
-                        device={device}
+                        device={deviceName} // 👈 alias jako nazwa urządzenia
                         pin={`pin_${pin}`}
                         raw={data.raw}
                         state={data.state}
@@ -71,5 +75,4 @@ export default function SensorGrid() {
             })}
         </div>
     );
-
 }

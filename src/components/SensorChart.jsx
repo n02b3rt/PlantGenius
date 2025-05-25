@@ -20,12 +20,15 @@ export default function SensorChart({ sensorId, onBack }) {
                     (item) =>
                         typeof item.raw === "number" &&
                         !isNaN(item.raw) &&
-                        typeof item.timestamp === "string"
+                        typeof item.timestamp === "string" &&
+                        typeof item.state === "string" &&
+                        item.state.trim() !== ""
                 );
                 setData(clean);
             })
             .catch((err) => console.error("Błąd pobierania wykresu:", err));
     }, [sensorId]);
+
 
     return (
         <div className="bg-white rounded p-6 shadow w-full">
